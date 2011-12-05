@@ -11,9 +11,13 @@ module ApiClient
         @scopeable.format
       end
 
+      def append_format(path)
+        format ? [path, format].join('.') : path
+      end
+
       def find(id)
         path = [@path, id].join('/')
-        path = [path, format].join('.') if format
+        path = append_format(path)
         raw  = get(path)
         scoped(self) do
           @scopeable.build(raw)
@@ -21,8 +25,7 @@ module ApiClient
       end
 
       def find_all(params = {})
-        path = @path
-        path = [path, format].join('.') if format
+        path = append_format(@path)
         raw  = get(path, params)
         scoped(self) do
           @scopeable.build(raw)
@@ -30,8 +33,7 @@ module ApiClient
       end
 
       def create(params = {})
-        path = @path
-        path = [path, format].join('.') if format
+        path = append_format(@path)
         hash = if @scopeable.namespace
           { @scopeable.namespace => params }
         else
@@ -45,7 +47,7 @@ module ApiClient
 
       def update(id, params = {})
         path = [@path, id].join('/')
-        path = [path, format].join('.') if format
+        path = append_format(path)
         hash = if @scopeable.namespace
           { @scopeable.namespace => params }
         else
@@ -59,7 +61,7 @@ module ApiClient
 
       def destroy(id)
         path = [@path, id].join('/')
-        path = [path, format].join('.') if format
+        path = append_format(path)
         delete(path)
         true
       end
