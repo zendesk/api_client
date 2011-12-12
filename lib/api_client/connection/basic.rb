@@ -9,7 +9,7 @@ module ApiClient
 
       def create_handler
         # Create and memoize the connection object
-        @handler = Faraday.new(@endpoint) {}
+        @handler = Faraday.new(@endpoint, @options[:faraday] || {})
         finalize_handler
       end
 
