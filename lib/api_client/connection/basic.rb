@@ -9,7 +9,9 @@ module ApiClient
 
       def create_handler
         # Create and memoize the connection object
-        @handler = Faraday.new(@endpoint, @options[:faraday] || {})
+        # The empty block is necessary as we don't want Faraday to
+        # initialize itself, we build our own stack in finalize_handler
+        @handler = Faraday.new(@endpoint, @options[:faraday] || {})  do end
         finalize_handler
       end
 
