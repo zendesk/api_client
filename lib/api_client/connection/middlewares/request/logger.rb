@@ -5,7 +5,7 @@ class ApiClient::Connection::Middlewares::Request::Logger < Faraday::Middleware
     time    = Time.now
     returns = @app.call(env)
     taken   = Time.now - time
-    @logger.info "#{env[:method].upcase} #{env[:url]}: #{"%.4f" % taken} seconds"
+    @logger.info "#{env[:method].to_s.upcase} #{env[:url]}: #{"%.4f" % taken} seconds"
     returns
   end
 
