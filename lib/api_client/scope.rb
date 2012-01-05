@@ -29,6 +29,15 @@ module ApiClient
       @connection
     end
 
+    def raw
+      @raw = true
+      self
+    end
+
+    def raw?
+      !!@raw
+    end
+
     # 3 Pillars of scoping
     # options - passed on the the adapter
     # params  - converted to query or request body
@@ -63,7 +72,7 @@ module ApiClient
     # Low-level connection methods
 
     def request(method, path, options = {})
-      raw = options.delete(:raw)
+      raw = raw? || options.delete(:raw)
       params(options)
       response = connection.send method, path, @params, @headers
       raw ? response : @scopeable.parse(response)

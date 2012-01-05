@@ -103,8 +103,10 @@ describe ApiClient::Scope do
       instance = ApiClient::Scope.new(ApiClient::Base)
       instance.stub(:connection).and_return(connection)
       response = Faraday::Response.new(:body => '{"a": "1"}')
-      connection.should_receive(:get).with(@path, @params, @headers).and_return(response)
+      connection.should_receive(:get).twice.with(@path, @params, @headers).and_return(response)
       result = instance.params(@params).headers(@headers).request(:get, @path, :raw => true)
+      result.should == response
+      result = instance.raw.params(@params).headers(@headers).request(:get, @path)
       result.should == response
     end
 

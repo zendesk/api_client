@@ -16,19 +16,19 @@ module ApiClient
       end
 
       def find(id)
-        path = [@path, id].join('/')
-        path = append_format(path)
-        raw  = get(path)
+        path     = [@path, id].join('/')
+        path     = append_format(path)
+        response = get(path)
         scoped(self) do
-          @scopeable.build(raw)
+          raw? ? response : @scopeable.build(response)
         end
       end
 
       def find_all(params = {})
-        path = append_format(@path)
-        raw  = get(path, params)
+        path     = append_format(@path)
+        response = get(path, params)
         scoped(self) do
-          @scopeable.build(raw)
+          raw? ? response : @scopeable.build(response)
         end
       end
 
@@ -41,7 +41,7 @@ module ApiClient
         end
         response = post(path, hash)
         scoped(self) do
-          @scopeable.build(response)
+          raw? ? response : @scopeable.build(response)
         end
       end
 
@@ -55,7 +55,7 @@ module ApiClient
         end
         response = put(path, hash)
         scoped(self) do
-          @scopeable.build(response)
+          raw? ? response : @scopeable.build(response)
         end
       end
 
