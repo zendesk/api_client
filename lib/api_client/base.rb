@@ -14,7 +14,7 @@ module ApiClient
       extend ApiClient::Mixins::Delegation
       extend ApiClient::Mixins::Configuration
 
-      delegate :fetch, :get, :put, :post, :delete, :headers, :endpoint, :options, :adapter, :params, :to => :scope
+      delegate :fetch, :get, :put, :post, :delete, :headers, :endpoint, :options, :adapter, :params, :raw, :to => :scope
 
       dsl_accessor :format, :namespace
 
