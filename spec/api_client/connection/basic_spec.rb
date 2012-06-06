@@ -41,7 +41,7 @@ describe ApiClient::Connection::Basic do
     it "can perform GET requests" do
       @instance.handler.should_receive(:get) do |path, headers|
         headers.should == @headers
-        Faraday::Utils.parse_nested_query(path.split("?").last).should == @params
+        Faraday::Utils.send(:parse_nested_query, path.split("?").last).should == @params
         @response
       end
       @instance.get "/home", @params, @headers
@@ -60,7 +60,7 @@ describe ApiClient::Connection::Basic do
     it "can perform DELETE requests" do
       @instance.handler.should_receive(:delete) do |path, headers|
         headers.should == @headers
-        Faraday::Utils.parse_nested_query(path.split("?").last).should == @params
+        Faraday::Utils.send(:parse_nested_query, path.split("?").last).should == @params
         @response
       end
       @instance.delete "/home", @params, @headers
