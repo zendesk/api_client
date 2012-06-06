@@ -49,7 +49,8 @@ module ApiClient
       end
 
       def remote_update
-        self.class.update(self.id, payload)
+        scope = original_scope || self.class
+        scope.update(self.id, payload)
       end
 
       def remote_create

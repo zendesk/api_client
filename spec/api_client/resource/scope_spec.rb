@@ -102,7 +102,7 @@ describe ApiClient::Resource::Scope do
     end
 
     it "performs a update to update an existing record skipping the namespace if it is not present" do
-      @instance  = ApiClient::Resource::Scope.new(Restful2)
+      @instance = ApiClient::Resource::Scope.new(Restful2)
       response = { "id" => 42, "name" => "Foo" }
       @instance.should_receive(:put).with('/restful2s/42.json', {:name => "Foo"} ).and_return(response)
       result = @instance.update(42, :name => "Foo")
