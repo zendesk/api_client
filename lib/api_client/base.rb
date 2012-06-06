@@ -43,7 +43,13 @@ module ApiClient
     end
 
     def inspect
-      "#<#{self.class} id: #{self.id}>"
+      attributes = []
+      attr_keys = self.keys - ['id']
+      attributes.push "id: #{self.id}" if self.id
+      attr_keys.each do |key|
+        attributes.push("#{key}: #{self[key].inspect}")
+      end
+      "#<#{self.class} #{attributes.join(', ')}>"
     end
 
   end
