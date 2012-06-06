@@ -34,13 +34,17 @@ describe ApiClient::Connection::Basic do
     before do
       @instance = ApiClient::Connection::Basic.new("http://google.com")
       @headers  = { "header" => "token" }
-      @params   = { :param => 1, :nested => { :param => 1 } }
+      @params   = { "param" => "1", "nested" => { "param" => "1" } }
       @response = Faraday::Response.new(:status => 200)
     end
 
     it "can perform GET requests" do
-      @instance.handler.should_receive(:get).with("/home?param=1&nested[param]=1", @headers).and_return(@response)
-      @instance.get "/home", { :param => 1, :nested => { :param => 1 } }, @headers
+      @instance.handler.should_receive(:get) do |path, headers|
+        headers.should == @headers
+        Faraday::Utils.parse_nested_query(path.split("?").last).should == @params
+        @response
+      end
+      @instance.get "/home", @params, @headers
     end
 
     it "can perform POST requests" do
@@ -54,7 +58,11 @@ describe ApiClient::Connection::Basic do
     end
 
     it "can perform DELETE requests" do
-      @instance.handler.should_receive(:delete).with("/home?param=1&nested[param]=1", @headers).and_return(@response)
+      @instance.handler.should_receive(:delete) do |path, headers|
+        headers.should == @headers
+        Faraday::Utils.parse_nested_query(path.split("?").last).should == @params
+        @response
+      end
       @instance.delete "/home", @params, @headers
     end
 
