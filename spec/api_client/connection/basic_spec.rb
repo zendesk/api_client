@@ -36,33 +36,43 @@ describe ApiClient::Connection::Basic do
       @headers  = { "header" => "token" }
       @params   = { "param" => "1", "nested" => { "param" => "1" } }
       @response = Faraday::Response.new(:status => 200)
+      @faraday_request_params = mock
+      @faraday_request = mock(:params => @faraday_request_params) 
     end
 
     it "can perform GET requests" do
-      @instance.handler.should_receive(:get) do |path, headers|
-        headers.should == @headers
-        Faraday::Utils.send(:parse_nested_query, path.split("?").last).should == @params
-        @response
-      end
+      @instance.handler.
+        should_receive(:run_request).
+        with(:get, '/home', nil, @headers).
+        and_yield(@faraday_request).
+        and_return(@response)
+      @faraday_request_params.should_receive(:update).with(@params)
       @instance.get "/home", @params, @headers
     end
 
     it "can perform POST requests" do
-      @instance.handler.should_receive(:post).with("/home", @params, @headers).and_return(@response)
+      @instance.handler.
+        should_receive(:run_request).
+        with(:post, '/home', @params, @headers).
+        and_return(@response)
       @instance.post "/home", @params, @headers
     end
 
     it "can perform PUT requests" do
-      @instance.handler.should_receive(:put).with("/home", @params, @headers).and_return(@response)
+      @instance.handler.
+        should_receive(:run_request).
+        with(:put, '/home', @params, @headers).
+        and_return(@response)
       @instance.put "/home", @params, @headers
     end
 
     it "can perform DELETE requests" do
-      @instance.handler.should_receive(:delete) do |path, headers|
-        headers.should == @headers
-        Faraday::Utils.send(:parse_nested_query, path.split("?").last).should == @params
-        @response
-      end
+      @instance.handler.
+        should_receive(:run_request).
+        with(:delete, '/home', nil, @headers).
+        and_yield(@faraday_request).
+        and_return(@response)
+      @faraday_request_params.should_receive(:update).with(@params)
       @instance.delete "/home", @params, @headers
     end
 

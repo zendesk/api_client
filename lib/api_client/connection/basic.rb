@@ -30,9 +30,7 @@ module ApiClient
       # * headers - (optional) headers sent along with the request
       #
       def get(path, data = {}, headers = {})
-        query = Faraday::Utils.build_nested_query(data || {})
-        path  = [path, query].join('?') unless query.empty?
-        handle_response @handler.get(path, headers)
+        handle_response @handler.get(path, data, headers)
       end
 
       #### ApiClient::Connection::Abstract#post
@@ -71,9 +69,7 @@ module ApiClient
       #
       # This method automatically adds the application token header
       def delete(path, data = {}, headers = {})
-        query = Faraday::Utils.build_nested_query(data || {})
-        path  = [path, query].join('?') unless query.empty?
-        handle_response @handler.delete(path, headers)
+        handle_response @handler.delete(path, data, headers)
       end
 
       private
