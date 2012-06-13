@@ -42,11 +42,12 @@ describe ApiClient::Base do
   describe "original_scope" do
 
     it "holds the original scope it was created from" do
+      scope = ApiClient::Base.params(:foo => 1).headers('token' => 'aaa').options("some" => "option")
 
-      scope = ApiClient::Base.params(:foo => 1).headers('token' => 'aaa')
       instance = scope.build :key => 'value'
-      instance.original_scope.should == scope
-
+      instance.original_scope.headers.should == {'token' => 'aaa'}
+      instance.original_scope.params.should be_empty
+      instance.original_scope.options.should be_empty
     end
 
   end

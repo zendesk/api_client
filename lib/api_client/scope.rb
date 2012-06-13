@@ -61,6 +61,10 @@ module ApiClient
       self
     end
 
+    def clone_only_headers
+      self.class.new(self.scopeable).headers(self.headers)
+    end
+
     # Half-level :)
     # This is a swiss-army knife kind of method, extremely useful
     def fetch(path, options = {})
@@ -72,6 +76,8 @@ module ApiClient
     # Low-level connection methods
 
     def request(method, path, options = {})
+      options = options.dup
+
       raw = raw? || options.delete(:raw)
       params(options)
       response = connection.send method, path, @params, @headers

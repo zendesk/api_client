@@ -1,9 +1,6 @@
 module ApiClient
-
   module Mixins
-
     module Instantiation
-
       def self.extended(base)
         base.instance_eval do
           attr_accessor :original_scope
@@ -12,7 +9,7 @@ module ApiClient
 
       def build_one(hash)
         instance = self.new self.namespace ? hash[namespace] : hash
-        instance.original_scope = self.scope
+        instance.original_scope = self.scope.clone_only_headers
         instance
       end
 
@@ -27,9 +24,6 @@ module ApiClient
           build_one  result_or_array
         end
       end
-
     end
-
   end
-
 end
