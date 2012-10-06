@@ -53,6 +53,12 @@ describe ApiClient::Resource::Base do
         @instance.destroy
       end
 
+      it "retains the original scope" do
+        @instance.original_scope = stub
+        @instance.original_scope.should_receive(:destroy).with(42)
+        @instance.destroy
+      end
+
     end
 
     describe "#remote_update" do
@@ -75,6 +81,12 @@ describe ApiClient::Resource::Base do
 
       it "delegates the create to the class" do
         ApiClient::Resource::Base.should_receive(:create).with("name" => "Mike")
+        @instance.remote_create
+      end
+
+      it "retains the original scope" do
+        @instance.original_scope = stub
+        @instance.original_scope.should_receive(:create).with("name" => "Mike")
         @instance.remote_create
       end
 

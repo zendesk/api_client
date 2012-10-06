@@ -39,7 +39,7 @@ module ApiClient
       end
 
       def destroy
-        self.class.destroy(self.id)
+        get_scope.destroy(self.id)
       end
 
       def payload
@@ -49,12 +49,15 @@ module ApiClient
       end
 
       def remote_update
-        scope = original_scope || self.class
-        scope.update(self.id, payload)
+        get_scope.update(self.id, payload)
       end
 
       def remote_create
-        self.class.create(payload)
+        get_scope.create(payload)
+      end
+
+      def get_scope
+        original_scope || self.class
       end
 
     end
