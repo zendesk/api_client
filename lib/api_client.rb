@@ -4,10 +4,10 @@ module ApiClient
     attr_accessor :logger
   end
 
-  autoload :Base,          "api_client/base"
-  autoload :Errors,        "api_client/errors"
-  autoload :Scope,         "api_client/scope"
-  autoload :Utils,         "api_client/utils"
+  autoload :Base,           "api_client/base"
+  autoload :Errors,         "api_client/errors"
+  autoload :Scope,          "api_client/scope"
+  autoload :Utils,          "api_client/utils"
 
   module Mixins
     autoload :ConnectionHooks, "api_client/mixins/connection_hooks"
@@ -34,11 +34,13 @@ module ApiClient
       module Request
         autoload :OAuth,  "api_client/connection/middlewares/request/oauth"
         autoload :Logger, "api_client/connection/middlewares/request/logger"
+        autoload :Json,   "api_client/connection/middlewares/request/json"
       end
     end
 
     autoload :Abstract, "api_client/connection/abstract"
     autoload :Basic,    "api_client/connection/basic"
+    autoload :Json,     "api_client/connection/json"
     autoload :Oauth,    "api_client/connection/oauth"
   end
 
