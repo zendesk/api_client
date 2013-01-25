@@ -1,5 +1,5 @@
 require "faraday"
-require "yajl"
+require "multi_json"
 
 class ApiClient::Connection::Middlewares::Request::Json < Faraday::Middleware
   CONTENT_TYPE = "Content-Type".freeze
@@ -12,7 +12,7 @@ class ApiClient::Connection::Middlewares::Request::Json < Faraday::Middleware
   def call(env)
     match_content_type(env) do |data|
       params = Faraday::Utils::ParamsHash[data]
-      env[:body] = Yajl::Encoder.encode(params)
+      env[:body] = MultiJson.dump(params)
     end
     @app.call env
   end
