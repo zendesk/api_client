@@ -14,7 +14,7 @@ module ApiClient
 
         def inherited(subclass)
           super
-          small_name = subclass.name.split('::').last.downcase
+          small_name = NameResolver.resolve(subclass.name)
           subclass.namespace small_name
           subclass.prefix    self.prefix
           subclass.always do
