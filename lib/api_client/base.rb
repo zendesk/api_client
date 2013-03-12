@@ -1,5 +1,5 @@
 require "hashie"
-require "yajl"
+require "multi_json"
 
 module ApiClient
 
@@ -25,7 +25,7 @@ module ApiClient
       def parse(response)
         response = response.body if response.is_a?(Faraday::Response)
         if self.format == :json
-          Yajl::Parser.parse(response)
+          MultiJson.load(response)
         elsif self.format == :xml
           MultiXml.parse(response)
         else
