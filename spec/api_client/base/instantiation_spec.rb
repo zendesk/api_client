@@ -34,7 +34,7 @@ describe ApiClient::Base do
 
     it "are Hashie::Mashes" do
       result = ApiClient::Base.build({ :id => 1, :subhash => { :foo => 1 } })
-      result.subhash.should be_an_instance_of(Hashie::Mash)
+      result.subhash.should be_a(Hashie::Mash)
     end
 
   end
