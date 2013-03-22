@@ -21,6 +21,7 @@ module ApiClient
   module Resource
     autoload :Base,          "api_client/resource/base"
     autoload :Scope,         "api_client/resource/scope"
+    autoload :NameResolver,  "api_client/resource/name_resolver"
   end
 
   module Connection
