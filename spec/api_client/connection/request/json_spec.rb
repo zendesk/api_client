@@ -23,7 +23,7 @@ describe ApiClient::Connection::Middlewares::Request::Json do
 
   it "JSON encodes body" do
     app.should_receive(:call).
-      with(hash_including(:body => Yajl::Encoder.encode(body)))
+      with(hash_including(:body => MultiJson.dump(body)))
 
     subject.call(env)
   end
