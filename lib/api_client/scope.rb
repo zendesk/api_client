@@ -5,7 +5,7 @@ module ApiClient
     extend ApiClient::Mixins::Configuration
     extend ApiClient::Mixins::Delegation
 
-    delegate     :scoped, :to => :scopeable
+    delegate     :prefix, :scoped, :to => :scopeable
 
     dsl_accessor :endpoint, :adapter, :return_self => true
 
