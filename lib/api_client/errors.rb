@@ -1,16 +1,17 @@
 module ApiClient
 
   module Errors
-    class ConnectionFailed < Exception; end
-    class Config < Exception; end
-    class Unauthorized < Exception; end
-    class Forbidden < Exception; end
-    class NotFound < Exception; end
-    class Redirect < Exception; end
-    class BadRequest < Exception; end
-    class Unsupported < Exception; end
-    class ServerError < Exception; end
-    class UnprocessableEntity < Exception; end
+    class ApiClientError < StandardError; end
+    class ConnectionFailed < ApiClientError; end
+    class Config < ApiClientError; end
+    class Unauthorized < ApiClientError; end
+    class Forbidden < ApiClientError; end
+    class NotFound < ApiClientError; end
+    class Redirect < ApiClientError; end
+    class BadRequest < ApiClientError; end
+    class Unsupported < ApiClientError; end
+    class ServerError < ApiClientError; end
+    class UnprocessableEntity < ApiClientError; end
   end
 
 end
