@@ -13,7 +13,7 @@ describe ApiClient::Connection::Basic do
   end
 
   it "adds the logger middlewares to faraday if ApiClient.logger is available" do
-    logger = mock
+    logger = double
     ApiClient.stub(:logger).and_return(logger)
     instance = ApiClient::Connection::Basic.new("http://google.com")
     instance.handler.builder.handlers.collect(&:name).should == [
@@ -36,8 +36,8 @@ describe ApiClient::Connection::Basic do
       @headers  = { "header" => "token" }
       @params   = { "param" => "1", "nested" => { "param" => "1" } }
       @response = Faraday::Response.new(:status => 200)
-      @faraday_request_params = mock
-      @faraday_request = mock(:params => @faraday_request_params) 
+      @faraday_request_params = double
+      @faraday_request = double(:params => @faraday_request_params)
     end
 
     it "can perform GET requests" do

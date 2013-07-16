@@ -3,7 +3,7 @@ require "spec_helper"
 describe ApiClient::Connection::Middlewares::Request::OAuth do
 
   it "adds a oauth header to the request" do
-    app = mock
+    app = double
     options = {
       :token => 'TOKEN',
       :token_secret => 'SECRET',

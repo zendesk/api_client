@@ -3,7 +3,7 @@ require "spec_helper"
 describe ApiClient::Connection::Middlewares::Request::Logger do
 
   it "adds a oauth header to the request" do
-    app      = mock
+    app      = double
     logger   = FakeLogger.new
     instance = ApiClient::Connection::Middlewares::Request::Logger.new(app, logger)
     env = {

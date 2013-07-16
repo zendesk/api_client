@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe ApiClient::Connection::Middlewares::Request::Json do
-  let(:app) { mock }
+  let(:app) { double }
   let(:body) { {:some => :data} }
   let(:env) do
     {

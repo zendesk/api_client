@@ -19,18 +19,18 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       if RUBY_PLATFORM == "java"
-	      s.add_runtime_dependency(%q<json_pure>) 
-      else 
-	      s.add_runtime_dependency(%q<yajl-ruby>) 
+	      s.add_runtime_dependency(%q<json_pure>)
+      else
+	      s.add_runtime_dependency(%q<yajl-ruby>)
       end
       s.add_runtime_dependency(%q<faraday>, [">= 0.8.1"])
       s.add_runtime_dependency(%q<hashie>, [">= 2.0.5"])
       s.add_runtime_dependency(%q<multi_json>, [">= 1.6.1"])
     else
       if RUBY_PLATFORM == "java"
-	      s.add_dependency(%q<json_pure>) 
-      else 
-	      s.add_dependency(%q<yajl-ruby>) 
+	      s.add_dependency(%q<json_pure>)
+      else
+	      s.add_dependency(%q<yajl-ruby>)
       end
       s.add_dependency(%q<faraday>, [">= 0.8.1"])
       s.add_dependency(%q<hashie>, [">= 1.2.0"])
@@ -38,9 +38,9 @@ Gem::Specification.new do |s|
     end
   else
     if RUBY_PLATFORM == "java"
-      s.add_dependency(%q<json_pure>) 
-    else 
-      s.add_dependency(%q<yajl-ruby>) 
+      s.add_dependency(%q<json_pure>)
+    else
+      s.add_dependency(%q<yajl-ruby>)
     end
     s.add_dependency(%q<faraday>, [">= 0.8.1"])
     s.add_dependency(%q<hashie>, [">= 1.2.0"])

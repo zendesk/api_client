@@ -34,10 +34,10 @@ describe ApiClient::Base do
   describe '.scoped' do
 
     it "stores the scope in the thread context, attached to class name" do
-      mock_scope3 = mock
+      mock_scope3 = double
       ApiClient::Base.scoped(mock_scope3) do
         Thread.new {
-          mock_scope2 = mock
+          mock_scope2 = double
           ApiClient::Base.scoped(mock_scope2) do
             ApiClient::Base.scope.should == mock_scope2
             Thread.current[ApiClient::Base.scope_thread_attribute_name].should == [mock_scope2]
@@ -47,7 +47,7 @@ describe ApiClient::Base do
         Thread.current[ApiClient::Base.scope_thread_attribute_name].should == [mock_scope3]
       end
       Thread.new {
-        mock_scope = mock
+        mock_scope = double
         ApiClient::Base.scoped(mock_scope) do
           ApiClient::Base.scope.should == mock_scope
           Thread.current[ApiClient::Base.scope_thread_attribute_name].should == [mock_scope]

@@ -60,7 +60,7 @@ describe ApiClient::Scope do
     end
 
     it "executes connection hooks" do
-      AConnectionHook = mock
+      AConnectionHook = double
       class ScopeConnectionHooksTest < ApiClient::Base
       end
       ScopeConnectionHooksTest.connection_hooks = [AConnectionHook]
@@ -80,7 +80,7 @@ describe ApiClient::Scope do
     end
 
     def test_request(method)
-      connection = mock
+      connection = double
       instance = ApiClient::Scope.new(ApiClient::Base)
       instance.stub(:connection).and_return(connection)
       response = Faraday::Response.new(:body => '{"a": "1"}')
@@ -89,7 +89,7 @@ describe ApiClient::Scope do
     end
 
     it "can make any request" do
-      connection = mock
+      connection = double
       instance = ApiClient::Scope.new(ApiClient::Base)
       instance.stub(:connection).and_return(connection)
       response = Faraday::Response.new(:body => '{"a": "1"}')
@@ -99,7 +99,7 @@ describe ApiClient::Scope do
     end
 
     it "can make any request and get a raw response" do
-      connection = mock
+      connection = double
       instance = ApiClient::Scope.new(ApiClient::Base)
       instance.stub(:connection).and_return(connection)
       response = Faraday::Response.new(:body => '{"a": "1"}')
@@ -133,7 +133,7 @@ describe ApiClient::Scope do
     describe "fetch" do
 
       it "performs a get and builds an object" do
-        connection = mock
+        connection = double
         instance = ApiClient::Scope.new(ApiClient::Base)
         instance.stub(:connection).and_return(connection)
         response = Faraday::Response.new(:body => '{"id": 42}')

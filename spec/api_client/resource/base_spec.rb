@@ -54,7 +54,7 @@ describe ApiClient::Resource::Base do
       end
 
       it "retains the original scope" do
-        @instance.original_scope = stub
+        @instance.original_scope = double
         @instance.original_scope.should_receive(:destroy).with(42)
         @instance.destroy
       end
@@ -70,7 +70,7 @@ describe ApiClient::Resource::Base do
 
       it "retains the original scope" do
         ApiClient::Resource::Base.stub(:update)
-        @instance.original_scope = stub
+        @instance.original_scope = double
         @instance.original_scope.should_receive(:update).with(42, "name" => "Mike")
         @instance.remote_update
       end
@@ -85,7 +85,7 @@ describe ApiClient::Resource::Base do
       end
 
       it "retains the original scope" do
-        @instance.original_scope = stub
+        @instance.original_scope = double
         @instance.original_scope.should_receive(:create).with("name" => "Mike")
         @instance.remote_create
       end

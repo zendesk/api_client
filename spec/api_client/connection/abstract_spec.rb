@@ -8,7 +8,7 @@ describe ApiClient::Connection::Abstract do
   it "does not raise an error when instantiating a subclass" do
     lambda {
       ConnectionSubclass.new("http://google.com")
-    }.should_not raise_error("Cannot instantiate abstract class")
+    }.should_not raise_error()
   end
 
   it "raises an error when instantiating directly and not as a subclass" do
