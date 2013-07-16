@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
 	      s.add_runtime_dependency(%q<yajl-ruby>) 
       end
       s.add_runtime_dependency(%q<faraday>, [">= 0.8.1"])
-      s.add_runtime_dependency(%q<hashie>, [">= 1.2.0"])
+      s.add_runtime_dependency(%q<hashie>, [">= 2.0.5"])
       s.add_runtime_dependency(%q<multi_json>, [">= 1.6.1"])
     else
       if RUBY_PLATFORM == "java"
