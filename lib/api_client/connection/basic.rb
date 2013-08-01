@@ -1,5 +1,6 @@
 # Faraday for making requests
 require 'faraday'
+require 'faraday/request/url_encoded'
 
 module ApiClient
 
