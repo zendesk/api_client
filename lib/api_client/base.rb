@@ -23,7 +23,11 @@ module ApiClient
       end
 
       def parse(response)
-        response = response.body if response.is_a?(Faraday::Response)
+        if response.is_a?(Faraday::Response)
+          return nil if response.status == 204
+          response = response.body
+        end
+
         if self.format == :json
           MultiJson.load(response)
         elsif self.format == :xml

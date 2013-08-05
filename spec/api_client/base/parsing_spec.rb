@@ -27,10 +27,12 @@ describe ApiClient::Base do
     ApiClient::Base.stub(:format).and_return(:json)
     parsed = ApiClient::Base.parse(response)
     parsed.should == {"a"=> "1"}
-
   end
 
-
-
-
+  it "returns nil if the response is 204" do
+    response = Faraday::Response.new(:body => nil, :status => 204)
+    ApiClient::Base.stub(:format).and_return(:json)
+    parsed = ApiClient::Base.parse(response)
+    parsed.should == nil
+  end
 end
