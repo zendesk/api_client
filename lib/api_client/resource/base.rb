@@ -18,7 +18,7 @@ module ApiClient
           subclass.namespace small_name
           subclass.prefix    self.prefix
           subclass.always do
-            name    = subclass.name.split('::').last.downcase
+            name    = small_name
             pre_fix = prefix
             path ["", prefix, "#{name}s"].compact.join('/')
           end
