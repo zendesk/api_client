@@ -126,6 +126,13 @@ describe ApiClient::Connection::Basic do
       }.should raise_error(ApiClient::Errors::Unsupported)
     end
 
+    it "raises an ApiClient::Errors::Conflict if status is 409" do
+      @response.env[:status] = 409
+      lambda {
+        @instance.send :handle_response, @response
+      }.should raise_error(ApiClient::Errors::Conflict)
+    end
+
     it "raises an ApiClient::Errors::Unsupported if status is 422" do
       @response.env[:status] = 422
       lambda {

@@ -10,6 +10,7 @@ module ApiClient
     class Redirect < ApiClientError; end
     class BadRequest < ApiClientError; end
     class Unsupported < ApiClientError; end
+    class Conflict < ApiClientError; end
     class ServerError < ApiClientError; end
     class UnprocessableEntity < ApiClientError; end
   end

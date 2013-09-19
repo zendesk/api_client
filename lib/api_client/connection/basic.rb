@@ -87,6 +87,8 @@ module ApiClient
             raise ApiClient::Errors::BadRequest
           when 406
             raise ApiClient::Errors::Unsupported
+          when 409
+            raise ApiClient::Errors::Conflict
           when 422
             raise ApiClient::Errors::UnprocessableEntity.new(response.body)
           when 300..399
