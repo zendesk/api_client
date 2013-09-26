@@ -30,7 +30,7 @@ module ApiClient
       # * headers - (optional) headers sent along with the request
       #
       def get(path, data = {}, headers = {})
-        handle_response @handler.get(path, data, headers)
+        exec_request(:get, path, data, headers)
       end
 
       #### ApiClient::Connection::Abstract#post
@@ -43,7 +43,7 @@ module ApiClient
       #
       # This method automatically adds the application token header
       def post(path, data = {}, headers = {})
-        handle_response @handler.post(path, data, headers)
+        exec_request(:post, path, data, headers)
       end
 
       #### ApiClient::Connection::Abstract#put
@@ -56,7 +56,7 @@ module ApiClient
       #
       # This method automatically adds the application token header
       def put(path, data = {}, headers = {})
-        handle_response @handler.put(path, data, headers)
+        exec_request(:put, path, data, headers)
       end
 
       #### FS::Connection#delete
@@ -69,32 +69,38 @@ module ApiClient
       #
       # This method automatically adds the application token header
       def delete(path, data = {}, headers = {})
-        handle_response @handler.delete(path, data, headers)
+        exec_request(:delete, path, data, headers)
       end
 
       private
 
-      def handle_response(response)
-        raise ApiClient::Errors::ConnectionFailed if !response
+      def exec_request(method, path, data, headers)
+        response = @handler.send(method, path, data, headers)
+        request = {method: method, path: path, data: data, headers: headers}
+        handle_response(request, response)
+      end
+
+      def handle_response(request, response)
+        raise ApiClient::Errors::ConnectionFailed.new(request, response) unless response
         case response.status
           when 401
-            raise ApiClient::Errors::Unauthorized
+            raise ApiClient::Errors::Unauthorized.new(request, response)
           when 403
-            raise ApiClient::Errors::Forbidden
+            raise ApiClient::Errors::Forbidden.new(request, response)
           when 404
-            raise ApiClient::Errors::NotFound
+            raise ApiClient::Errors::NotFound.new(request, response)
           when 400
-            raise ApiClient::Errors::BadRequest
+            raise ApiClient::Errors::BadRequest.new(request, response)
           when 406
-            raise ApiClient::Errors::Unsupported
+            raise ApiClient::Errors::Unsupported.new(request, response)
           when 409
-            raise ApiClient::Errors::Conflict
+            raise ApiClient::Errors::Conflict.new(request, response)
           when 422
-            raise ApiClient::Errors::UnprocessableEntity.new(response.body)
+            raise ApiClient::Errors::UnprocessableEntity.new(response.body, request, response)
           when 300..399
-            raise ApiClient::Errors::Redirect.new(response['Location'])
+            raise ApiClient::Errors::Redirect.new(response['Location'], request, response)
           when 500..599
-            raise ApiClient::Errors::ServerError
+            raise ApiClient::Errors::ServerError.new(request, response)
           else
             response
         end
