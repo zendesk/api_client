@@ -1,4 +1,3 @@
-
 module ApiClient
 
   class Scope
