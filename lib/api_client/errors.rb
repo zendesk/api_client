@@ -1,7 +1,16 @@
 module ApiClient
 
   module Errors
-    class ApiClientError < StandardError; end
+    class ApiClientError < StandardError
+      def initialize(message=nil, request, response)
+        super(message)
+        @request = request
+        @response = response
+      end
+
+      attr_reader :request, :response
+    end
+
     class ConnectionFailed < ApiClientError; end
     class Config < ApiClientError; end
     class Unauthorized < ApiClientError; end
