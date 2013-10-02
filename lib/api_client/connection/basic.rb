@@ -76,7 +76,7 @@ module ApiClient
 
       def exec_request(method, path, data, headers)
         response = @handler.send(method, path, data, headers)
-        request = {method: method, path: path, data: data, headers: headers}
+        request = {method: method, path: path, data: data}
         handle_response(request, response)
       rescue Faraday::Error::ConnectionFailed => e
         raise ApiClient::Errors::ConnectionFailed.new(e.message, request, response)
