@@ -56,6 +56,13 @@ module ApiClient
       "#<#{self.class} #{attributes.join(', ')}>"
     end
 
+    private
+
+    def method_missing(method_name, *args, &blk)
+      return super if key?(method_name)
+      return super if method_name.to_s.match(/(.*?)([?=!_])$/)
+      raise NoMethodError, "Attr #{method_name} not found for #{self.class.name}"
+    end
   end
 
 end

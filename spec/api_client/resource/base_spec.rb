@@ -11,7 +11,7 @@ describe ApiClient::Resource::Base do
   end
 
 
-  describe "persistence" do
+  context "persistence" do
 
     before do
       @instance = ApiClient::Resource::Base.new
@@ -90,6 +90,31 @@ describe ApiClient::Resource::Base do
         @instance.remote_create
       end
 
+    end
+
+  end
+
+  context 'attributes' do
+
+    let(:resource) { ApiClient::Resource::Base.new }
+
+    it 'sets new attribute' do
+      lambda { resource.foo = "Foo!" }.should_not raise_error
+      lambda { resource[:foo] = "Foo!" }.should_not raise_error
+    end
+
+    it 'returns value of known attribute' do
+      resource.bar = "Bar!"
+      resource.bar.should == "Bar!"
+      resource[:bar].should == "Bar!"
+    end
+
+    it 'fails when accessing an unknown attribute using dot-notation' do
+      lambda { resource.baz }.should raise_error(NoMethodError)
+    end
+
+    it 'does not fail when accessing an unknown attribute using square bracket-notation' do
+      lambda { resource[:baz] }.should_not raise_error
     end
 
   end
