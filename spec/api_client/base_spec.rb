@@ -11,11 +11,16 @@ describe ApiClient::Base do
   end
 
   class StrictApi < ApiClient::Base
-    self.strict_attr_reader true
-
     def accessor_of_x
       self.x
     end
+
+    def strict_attr_reader?
+      true
+    end
+  end
+
+  class StrictDescendant < StrictApi
   end
 
   describe "#inspect" do
@@ -67,6 +72,11 @@ describe ApiClient::Base do
     it "calling method which asks for missing attribute fails" do
       api = StrictApi.new
       lambda { api.accessor_of_x }.should raise_error(KeyError)
+    end
+
+    it "passes strict api configuration to subclasses" do
+      api = StrictDescendant.new
+      lambda { api.missing }.should raise_error(KeyError)
     end
   end
 end

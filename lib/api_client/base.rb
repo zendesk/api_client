@@ -16,7 +16,7 @@ module ApiClient
 
       delegate :fetch, :get, :put, :post, :delete, :headers, :endpoint, :options, :adapter, :params, :raw, :to => :scope
 
-      dsl_accessor :format, :namespace, :strict_attr_reader
+      dsl_accessor :format, :namespace
 
       def subkey_class
         Hashie::Mash
@@ -61,7 +61,7 @@ module ApiClient
       if respond_to?(method_name)
         super
       else
-        if self.class.strict_attr_reader
+        if respond_to?(:strict_attr_reader?) && self.strict_attr_reader?
           fetch(method_name)
         else
           super
