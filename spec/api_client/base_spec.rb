@@ -10,6 +10,13 @@ describe ApiClient::Base do
     subject.should respond_to("id")
   end
 
+  class StrictApi < ApiClient::Base
+    self.strict_attr_reader true
+
+    def accessor_of_x
+      self.x
+    end
+  end
 
   describe "#inspect" do
 
@@ -35,4 +42,31 @@ describe ApiClient::Base do
 
   end
 
+  describe "strict_read" do
+    it "fails if the key is missing and strict_read is set" do
+      api = StrictApi.new
+      lambda { api.missing }.should raise_error(KeyError)
+    end
+
+    it "doesn't fail if strict_read is not set" do
+      api = ApiClient::Base.new
+      api.missing
+    end
+
+    it "doesn't fail if the key was set after object was created" do
+      api = StrictApi.new
+      api.not_missing = 1
+      api.not_missing.should == 1
+    end
+
+    it "allows to call methods" do
+      api = StrictApi.new(:x => 14)
+      api.accessor_of_x.should == 14
+    end
+
+    it "calling method which asks for missing attribute fails" do
+      api = StrictApi.new
+      lambda { api.accessor_of_x }.should raise_error(KeyError)
+    end
+  end
 end

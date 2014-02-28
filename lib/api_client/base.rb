@@ -16,7 +16,7 @@ module ApiClient
 
       delegate :fetch, :get, :put, :post, :delete, :headers, :endpoint, :options, :adapter, :params, :raw, :to => :scope
 
-      dsl_accessor :format, :namespace
+      dsl_accessor :format, :namespace, :strict_attr_reader
 
       def subkey_class
         Hashie::Mash
@@ -56,7 +56,17 @@ module ApiClient
       "#<#{self.class} #{attributes.join(', ')}>"
     end
 
+    private
+    def method_missing(method_name, *args, &blk)
+      if respond_to?(method_name)
+        super
+      else
+        if self.class.strict_attr_reader
+          fetch(method_name)
+        else
+          super
+        end
+      end
+    end
   end
-
 end
-
