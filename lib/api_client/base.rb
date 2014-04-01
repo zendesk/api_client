@@ -56,7 +56,17 @@ module ApiClient
       "#<#{self.class} #{attributes.join(', ')}>"
     end
 
+    private
+    def method_missing(method_name, *args, &blk)
+      if respond_to?(method_name)
+        super
+      else
+        if respond_to?(:strict_attr_reader?) && self.strict_attr_reader?
+          fetch(method_name)
+        else
+          super
+        end
+      end
+    end
   end
-
 end
-
