@@ -60,8 +60,14 @@ describe ApiClient::Base do
 
     it "doesn't fail if the key was set after object was created" do
       api = StrictApi.new
-      api.not_missing = 1
+      lambda { api.not_missing = 1 }.should_not raise_error
       api.not_missing.should == 1
+    end
+
+    it "doesn't fail for predicate methods if key is not set" do
+      api = StrictApi.new
+      lambda { api.missing? }.should_not raise_error
+      api.missing?.should be_false
     end
 
     it "allows to call methods" do
