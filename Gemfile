@@ -4,7 +4,6 @@ source "http://rubygems.org"
 gemspec
 
 # Testing
-gem "rspec"
 gem "simplecov"
 
 # Soft dependencies
