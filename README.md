@@ -1,4 +1,4 @@
-ApiClient
+ApiClient [![Build Status](https://travis-ci.org/futuresimple/api_client.svg?branch=master)](https://travis-ci.org/futuresimple/api_client)
 =========
 
 ApiClient is an experimental builder for HTTP API clients. The goal is to provide a easy to use engine for constructing queries and map the responses to instances of Hashie::Mash subclasses.
