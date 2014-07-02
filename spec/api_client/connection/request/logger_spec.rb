@@ -13,7 +13,7 @@ describe ApiClient::Connection::Middlewares::Request::Logger do
     }
     app.should_receive(:call).with(env)
     instance.call(env)
-    logger.history.first.should == "GET http://api.twitter.com: 0.0000 seconds"
+    logger.history.first.include?("GET http://api.twitter.com").should be_true
   end
 
 end
