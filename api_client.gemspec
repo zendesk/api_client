@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = ApiClient::VERSION
   s.authors     = ["Marcin Bunsch"]
   s.email       = ["marcin@futuresimple.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/futuresimple/api_client"
   s.summary     = %q{API client builder}
   s.description = %q{API client builder}
 
