@@ -7,5 +7,5 @@ gemspec
 gem "simplecov"
 
 # Soft dependencies
-gem "simple_oauth"
+gem "simple_oauth", '0.2.0'
 gem 'multi_xml'
