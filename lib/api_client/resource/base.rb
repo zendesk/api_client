@@ -35,7 +35,13 @@ module ApiClient
       end
 
       def save
-        self.persisted? ? remote_update : remote_create
+        result = self.persisted? ? remote_update : remote_create
+
+        result.each_pair do |k,v|
+          __send__("#{k}=", v)
+        end if result
+
+        self
       end
 
       def destroy
