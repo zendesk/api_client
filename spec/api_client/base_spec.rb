@@ -23,6 +23,16 @@ describe ApiClient::Base do
   class StrictDescendant < StrictApi
   end
 
+  context "when used in an array" do
+
+    subject { [StrictApi.new] }
+
+    it "does not break Array#flatten" do
+      lambda { subject.flatten }.should_not raise_error
+    end
+
+  end
+
   describe "#inspect" do
 
     it "has a nice inspect" do

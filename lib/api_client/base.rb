@@ -60,11 +60,17 @@ module ApiClient
     def method_missing(method_name, *args, &blk)
       if respond_to?(method_name) || has_special_ending?(method_name)
         super
-      elsif respond_to?(:strict_attr_reader?) && self.strict_attr_reader?
+      elsif use_strict_reader?(method_name)
         fetch(method_name)
       else
         super
       end
+    end
+
+    def use_strict_reader?(method_name)
+      respond_to?(:strict_attr_reader?) &&
+        self.strict_attr_reader? &&
+        method_name != :to_ary
     end
 
     def has_special_ending?(name)
