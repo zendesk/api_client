@@ -1,3 +1,7 @@
+# 0.5.9
+
+ * fix compatibility with ruby 1.8.x
+
 # 0.5.8
 
  * fix the problem with strict_attr_reader and Array#flatten
