@@ -2,7 +2,7 @@ module ApiClient
 
   module Errors
     class ApiClientError < StandardError
-      def initialize(message=nil, request, response)
+      def initialize(message = nil, request = nil, response = nil)
         super(message)
         @request = request
         @response = response
