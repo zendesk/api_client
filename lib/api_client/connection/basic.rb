@@ -99,6 +99,8 @@ module ApiClient
             raise ApiClient::Errors::Conflict.new(request, response)
           when 422
             raise ApiClient::Errors::UnprocessableEntity.new(response.body, request, response)
+          when 429
+            raise ApiClient::Errors::TooManyRequests.new(response.body, request, response)
           when 300..399
             raise ApiClient::Errors::Redirect.new(response['Location'], request, response)
           when 500..599

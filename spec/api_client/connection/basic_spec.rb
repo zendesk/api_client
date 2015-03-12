@@ -141,6 +141,13 @@ describe ApiClient::Connection::Basic do
       }.should raise_error(ApiClient::Errors::UnprocessableEntity)
     end
 
+    it "raises an ApiClient::Errors::TooManyRequests if status is 429" do
+      @response.env[:status] = 429
+      lambda {
+        @instance.send :handle_response, request, @response
+      }.should raise_error(ApiClient::Errors::TooManyRequests)
+    end
+
     it "raises an ApiClient::Errors::Unsupported if status is 300..399" do
       @response.env[:status] = 302
       @response.env[:response_headers] = { 'Location' => "https://google.com" }

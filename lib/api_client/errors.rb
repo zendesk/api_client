@@ -22,6 +22,7 @@ module ApiClient
     class Conflict < ApiClientError; end
     class ServerError < ApiClientError; end
     class UnprocessableEntity < ApiClientError; end
+    class TooManyRequests < ApiClientError; end
   end
 
 end

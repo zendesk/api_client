@@ -1,3 +1,7 @@
+# 0.5.10
+
+ * add TooManyRequests error
+
 # 0.5.9
 
  * fix compatibility with ruby 1.8.x
