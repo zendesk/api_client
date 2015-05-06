@@ -83,20 +83,20 @@ module ApiClient
       end
 
       def handle_response(request, response)
-        raise ApiClient::Errors::ConnectionFailed.new(request, response) unless response
+        raise ApiClient::Errors::ConnectionFailed.new(nil, request, response) unless response
         case response.status
           when 401
-            raise ApiClient::Errors::Unauthorized.new(request, response)
+            raise ApiClient::Errors::Unauthorized.new(nil, request, response)
           when 403
-            raise ApiClient::Errors::Forbidden.new(request, response)
+            raise ApiClient::Errors::Forbidden.new(nil, request, response)
           when 404
-            raise ApiClient::Errors::NotFound.new(request, response)
+            raise ApiClient::Errors::NotFound.new(nil, request, response)
           when 400
-            raise ApiClient::Errors::BadRequest.new(request, response)
+            raise ApiClient::Errors::BadRequest.new(nil, request, response)
           when 406
-            raise ApiClient::Errors::Unsupported.new(request, response)
+            raise ApiClient::Errors::Unsupported.new(nil, request, response)
           when 409
-            raise ApiClient::Errors::Conflict.new(request, response)
+            raise ApiClient::Errors::Conflict.new(nil, request, response)
           when 422
             raise ApiClient::Errors::UnprocessableEntity.new(response.body, request, response)
           when 429
@@ -104,7 +104,7 @@ module ApiClient
           when 300..399
             raise ApiClient::Errors::Redirect.new(response['Location'], request, response)
           when 500..599
-            raise ApiClient::Errors::ServerError.new(request, response)
+            raise ApiClient::Errors::ServerError.new(nil, request, response)
           else
             response
         end

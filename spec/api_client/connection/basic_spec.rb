@@ -89,78 +89,79 @@ describe ApiClient::Connection::Basic do
     it "raises an ApiClient::Errors::ConnectionFailed if there is no response" do
       lambda {
         @instance.send :handle_response, request, nil
-      }.should raise_error(ApiClient::Errors::ConnectionFailed)
+      }.should raise_error(ApiClient::Errors::ConnectionFailed, "ApiClient::Errors::ConnectionFailed")
     end
 
     it "raises an ApiClient::Errors::Unauthorized if status is 401" do
       @response.env[:status] = 401
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::Unauthorized)
+      }.should raise_error(ApiClient::Errors::Unauthorized, "ApiClient::Errors::Unauthorized")
     end
 
     it "raises an ApiClient::Errors::Forbidden if status is 403" do
       @response.env[:status] = 403
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::Forbidden)
+      }.should raise_error(ApiClient::Errors::Forbidden, "ApiClient::Errors::Forbidden")
     end
 
     it "raises an ApiClient::Errors::NotFound if status is 404" do
       @response.env[:status] = 404
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::NotFound)
+      }.should raise_error(ApiClient::Errors::NotFound, "ApiClient::Errors::NotFound")
     end
 
     it "raises an ApiClient::Errors::BadRequest if status is 400" do
       @response.env[:status] = 400
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::BadRequest)
+      }.should raise_error(ApiClient::Errors::BadRequest, "ApiClient::Errors::BadRequest")
     end
 
     it "raises an ApiClient::Errors::Unsupported if status is 406" do
       @response.env[:status] = 406
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::Unsupported)
+      }.should raise_error(ApiClient::Errors::Unsupported, "ApiClient::Errors::Unsupported")
     end
 
     it "raises an ApiClient::Errors::Conflict if status is 409" do
       @response.env[:status] = 409
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::Conflict)
+      }.should raise_error(ApiClient::Errors::Conflict, "ApiClient::Errors::Conflict")
     end
 
     it "raises an ApiClient::Errors::Unsupported if status is 422" do
       @response.env[:status] = 422
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::UnprocessableEntity)
+      }.should raise_error(ApiClient::Errors::UnprocessableEntity, @response.body)
     end
 
     it "raises an ApiClient::Errors::TooManyRequests if status is 429" do
       @response.env[:status] = 429
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::TooManyRequests)
+      }.should raise_error(ApiClient::Errors::TooManyRequests, @response.body)
     end
 
     it "raises an ApiClient::Errors::Unsupported if status is 300..399" do
+      location = "https://google.com"
       @response.env[:status] = 302
-      @response.env[:response_headers] = { 'Location' => "https://google.com" }
+      @response.env[:response_headers] = { 'Location' => location }
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::Redirect)
+      }.should raise_error(ApiClient::Errors::Redirect, location)
     end
 
     it "raises an ApiClient::Errors::ServerError if status is 500..599" do
       @response.env[:status] = 502
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::ServerError)
+      }.should raise_error(ApiClient::Errors::ServerError, "ApiClient::Errors::ServerError")
     end
 
   end
