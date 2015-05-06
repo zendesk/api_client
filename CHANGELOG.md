@@ -1,3 +1,7 @@
+# 0.5.11
+
+ * fix handling errors
+
 # 0.5.10
 
  * add TooManyRequests error
