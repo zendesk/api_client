@@ -4,7 +4,16 @@ module ApiClient
     attr_accessor :logger
   end
 
+  def self.configure(&block)
+    yield(config)
+  end
+
+  def self.config
+    @config ||= ::ApiClient::Config.new
+  end
+
   autoload :Base,           "api_client/base"
+  autoload :Config,         "api_client/config"
   autoload :Errors,         "api_client/errors"
   autoload :Scope,          "api_client/scope"
   autoload :Utils,          "api_client/utils"

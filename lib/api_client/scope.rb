@@ -13,7 +13,7 @@ module ApiClient
     def initialize(scopeable)
       @scopeable  = scopeable
       @params     = {}
-      @headers    = {}
+      @headers    = ApiClient.config.default_headers.dup
       @options    = {}
       @hooks      = @scopeable.connection_hooks || []
       @scopeable.default_scopes.each do |default_scope|
