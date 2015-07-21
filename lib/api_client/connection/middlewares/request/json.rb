@@ -1,6 +1,3 @@
-require "faraday"
-require "multi_json"
-
 class ApiClient::Connection::Middlewares::Request::Json < Faraday::Middleware
   CONTENT_TYPE = "Content-Type".freeze
 
