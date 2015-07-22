@@ -1,3 +1,7 @@
+# 0.5.12
+
+ * fix threading problem on ruby 1.8.7 and earlier
+
 # 0.5.11
 
  * fix handling errors
