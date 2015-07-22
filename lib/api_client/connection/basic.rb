@@ -1,6 +1,3 @@
-# Faraday for making requests
-require 'faraday'
-
 module ApiClient
 
   module Connection

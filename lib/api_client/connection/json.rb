@@ -1,5 +1,3 @@
-require 'faraday'
-
 # Exactly like Basic, but uses JSON encoding for request body
 # if applicable
 module ApiClient

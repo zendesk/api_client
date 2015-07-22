@@ -1,31 +1,34 @@
 require "api_client/version"
+require "faraday"
+require "hashie"
+require "multi_json"
+
 module ApiClient
   class << self
     attr_accessor :logger
   end
 
-  autoload :Base,           "api_client/base"
-  autoload :Errors,         "api_client/errors"
-  autoload :Scope,          "api_client/scope"
-  autoload :Utils,          "api_client/utils"
-
   module Mixins
-    autoload :ConnectionHooks, "api_client/mixins/connection_hooks"
-    autoload :Delegation,      "api_client/mixins/delegation"
-    autoload :Configuration,   "api_client/mixins/configuration"
-    autoload :Inheritance,     "api_client/mixins/inheritance"
-    autoload :Instantiation,   "api_client/mixins/instantiation"
-    autoload :Scoping,         "api_client/mixins/scoping"
+    require "api_client/mixins/connection_hooks"
+    require "api_client/mixins/delegation"
+    require "api_client/mixins/configuration"
+    require "api_client/mixins/inheritance"
+    require "api_client/mixins/instantiation"
+    require "api_client/mixins/scoping"
   end
 
+  require "api_client/base"
+  require "api_client/errors"
+  require "api_client/scope"
+  require "api_client/utils"
+
   module Resource
-    autoload :Base,          "api_client/resource/base"
-    autoload :Scope,         "api_client/resource/scope"
-    autoload :NameResolver,  "api_client/resource/name_resolver"
+    require "api_client/resource/base"
+    require "api_client/resource/scope"
+    require "api_client/resource/name_resolver"
   end
 
   module Connection
-
     class << self
       attr_accessor :default
     end
@@ -33,16 +36,15 @@ module ApiClient
 
     module Middlewares
       module Request
-        autoload :OAuth,  "api_client/connection/middlewares/request/oauth"
-        autoload :Logger, "api_client/connection/middlewares/request/logger"
-        autoload :Json,   "api_client/connection/middlewares/request/json"
+        require "api_client/connection/middlewares/request/oauth"
+        require "api_client/connection/middlewares/request/logger"
+        require "api_client/connection/middlewares/request/json"
       end
     end
 
-    autoload :Abstract, "api_client/connection/abstract"
-    autoload :Basic,    "api_client/connection/basic"
-    autoload :Json,     "api_client/connection/json"
-    autoload :Oauth,    "api_client/connection/oauth"
+    require "api_client/connection/abstract"
+    require "api_client/connection/basic"
+    require "api_client/connection/json"
+    require "api_client/connection/oauth"
   end
-
 end
