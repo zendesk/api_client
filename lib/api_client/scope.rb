@@ -60,6 +60,12 @@ module ApiClient
       self
     end
 
+    def raw_body(options = nil)
+      return @raw_body if options.nil?
+      @raw_body = options
+      self
+    end
+
     def clone_only_headers
       self.class.new(self.scopeable).headers(self.headers)
     end
@@ -79,7 +85,7 @@ module ApiClient
 
       raw = raw? || options.delete(:raw)
       params(options)
-      response = connection.send method, path, @params, @headers
+      response = connection.send method, path, (@raw_body || @params), @headers
       raw ? response : @scopeable.parse(response)
     end
 
