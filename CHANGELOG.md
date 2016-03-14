@@ -1,3 +1,7 @@
+# 0.5.13
+
+ * add raw_body method to Scope which allows to set non-hash request payload
+
 # 0.5.12
 
  * fix threading problem on ruby 1.8.7 and earlier
