@@ -13,41 +13,38 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "api_client"
 
+  def use(s, method, *args)
+    s.send method, *args
+  end
+
+  # Declare runtime dependencies here:
+  def add_runtime_dependencies(s, method)
+    if RUBY_PLATFORM == "java"
+      use(s, method, 'json_pure')
+    else
+      use(s, method, 'yajl-ruby')
+    end
+
+    use(s, method, 'faraday', [">= 0.8.1"])
+    use(s, method, 'hashie', [">= 2.0.5"])
+    use(s, method, 'multi_json', [">= 1.6.1"])
+  end
+
+  # Declare development dependencies here:
+  s.add_development_dependency 'rspec', '2.14.1'
+
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      if RUBY_PLATFORM == "java"
-	      s.add_runtime_dependency(%q<json_pure>)
-      else
-	      s.add_runtime_dependency(%q<yajl-ruby>)
-      end
-      s.add_runtime_dependency(%q<faraday>, [">= 0.8.1"])
-      s.add_runtime_dependency(%q<hashie>, [">= 2.0.5"])
-      s.add_runtime_dependency(%q<multi_json>, [">= 1.6.1"])
+      add_runtime_dependencies(s, :add_runtime_dependency)
     else
-      if RUBY_PLATFORM == "java"
-	      s.add_dependency(%q<json_pure>)
-      else
-	      s.add_dependency(%q<yajl-ruby>)
-      end
-      s.add_dependency(%q<faraday>, [">= 0.8.1"])
-      s.add_dependency(%q<hashie>, [">= 2.0.5"])
-      s.add_dependency(%q<multi_json>, [">= 1.6.1"])
+      add_runtime_dependencies(s, :add_dependency)
     end
   else
-    if RUBY_PLATFORM == "java"
-      s.add_dependency(%q<json_pure>)
-    else
-      s.add_dependency(%q<yajl-ruby>)
-    end
-    s.add_dependency(%q<faraday>, [">= 0.8.1"])
-    s.add_dependency(%q<hashie>, [">= 2.0.5"])
-    s.add_dependency(%q<multi_json>, [">= 1.6.1"])
+    add_runtime_dependencies(s, :add_dependency)
   end
-
-  s.add_development_dependency "rspec", '2.14.1'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
