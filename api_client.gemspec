@@ -21,12 +21,13 @@ Gem::Specification.new do |s|
   def add_runtime_dependencies(s, method)
     if RUBY_PLATFORM == "java"
       use(s, method, 'json_pure')
+      use(s, method, 'hashie', [">= 2.0.5"])
     else
       use(s, method, 'yajl-ruby')
+      use(s, method, 'hashie', RUBY_VERSION =~ /1\.8/ ? [">= 2.0.5", "<= 3.4.2"] : [">= 2.0.5"])
     end
 
     use(s, method, 'faraday', [">= 0.8.1"])
-    use(s, method, 'hashie', [">= 2.0.5"])
     use(s, method, 'multi_json', [">= 1.6.1"])
   end
 
