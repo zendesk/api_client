@@ -13,22 +13,18 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "api_client"
 
-  def use(s, method, *args)
-    s.send method, *args
-  end
-
   # Declare runtime dependencies here:
-  def add_runtime_dependencies(s, method)
+  def s.add_runtime_dependencies(method)
     if RUBY_PLATFORM == "java"
-      use(s, method, 'json_pure')
-      use(s, method, 'hashie', [">= 2.0.5"])
+      send method, 'json_pure'
+      send method, 'hashie', [">= 2.0.5"]
     else
-      use(s, method, 'yajl-ruby')
-      use(s, method, 'hashie', RUBY_VERSION =~ /1\.8/ ? [">= 2.0.5", "<= 3.4.2"] : [">= 2.0.5"])
+      send method, 'yajl-ruby'
+      send method, 'hashie', RUBY_VERSION =~ /1\.8/ ? [">= 2.0.5", "<= 3.4.2"] : [">= 2.0.5"]
     end
 
-    use(s, method, 'faraday', [">= 0.8.1"])
-    use(s, method, 'multi_json', [">= 1.6.1"])
+    send method, 'faraday', [">= 0.8.1"]
+    send method, 'multi_json', [">= 1.6.1"]
   end
 
   # Declare development dependencies here:
@@ -39,12 +35,12 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      add_runtime_dependencies(s, :add_runtime_dependency)
+      s.add_runtime_dependencies(:add_runtime_dependency)
     else
-      add_runtime_dependencies(s, :add_dependency)
+      s.add_runtime_dependencies(:add_dependency)
     end
   else
-    add_runtime_dependencies(s, :add_dependency)
+    s.add_runtime_dependencies(:add_dependency)
   end
 
   s.files         = `git ls-files`.split("\n")
