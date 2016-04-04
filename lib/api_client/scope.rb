@@ -15,7 +15,6 @@ module ApiClient
       @params     = {}
       @headers    = {}
       @options    = {}
-      @hooks      = @scopeable.connection_hooks || []
       @scopeable.default_scopes.each do |default_scope|
         self.instance_eval(&default_scope)
       end
@@ -24,7 +23,8 @@ module ApiClient
     def connection
       klass       = Connection.const_get((@adapter || Connection.default).to_s.capitalize)
       @connection = klass.new(@endpoint , @options || {})
-      @hooks.each { |hook| hook.call(@connection) }
+      hooks      = @scopeable.connection_hooks || []
+      hooks.each { |hook| hook.call(@connection) }
       @connection
     end
 
