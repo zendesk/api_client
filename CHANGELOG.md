@@ -1,3 +1,7 @@
+# 0.5.14
+
+ * make ApiClient::Base marshallable by not storing proc as instance var
+
 # 0.5.13
 
  * add raw_body method to Scope which allows to set non-hash request payload
