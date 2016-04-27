@@ -13,16 +13,33 @@ module ApiClient
 
     class ConnectionFailed < ApiClientError; end
     class Config < ApiClientError; end
-    class Unauthorized < ApiClientError; end
-    class Forbidden < ApiClientError; end
-    class NotFound < ApiClientError; end
-    class Redirect < ApiClientError; end
-    class BadRequest < ApiClientError; end
-    class Unsupported < ApiClientError; end
-    class Conflict < ApiClientError; end
-    class ServerError < ApiClientError; end
-    class UnprocessableEntity < ApiClientError; end
-    class TooManyRequests < ApiClientError; end
+
+    class ApiClientResponseError < ApiClientError
+      def to_s
+        with_status_code_if_present(super)
+      end
+
+      private
+
+      def with_status_code_if_present(msg)
+        if response && response.respond_to?(:status)
+          msg += " (#{response.status})"
+        else
+          msg
+        end
+      end
+    end
+
+    class Unauthorized < ApiClientResponseError; end
+    class Forbidden < ApiClientResponseError; end
+    class NotFound < ApiClientResponseError; end
+    class Redirect < ApiClientResponseError; end
+    class BadRequest < ApiClientResponseError; end
+    class Unsupported < ApiClientResponseError; end
+    class Conflict < ApiClientResponseError; end
+    class ServerError < ApiClientResponseError; end
+    class UnprocessableEntity < ApiClientResponseError; end
+    class TooManyRequests < ApiClientResponseError; end
   end
 
 end
