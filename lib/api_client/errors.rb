@@ -3,6 +3,7 @@ module ApiClient
   module Errors
     class ApiClientError < StandardError
       def initialize(message = nil, request = nil, response = nil)
+        message ||= "Status code: #{response.status}" if response
         super(message)
         @request = request
         @response = response

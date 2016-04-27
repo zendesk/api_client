@@ -96,42 +96,42 @@ describe ApiClient::Connection::Basic do
       @response.env[:status] = 401
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::Unauthorized, "ApiClient::Errors::Unauthorized")
+      }.should raise_error(ApiClient::Errors::Unauthorized, "Status code: 401")
     end
 
     it "raises an ApiClient::Errors::Forbidden if status is 403" do
       @response.env[:status] = 403
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::Forbidden, "ApiClient::Errors::Forbidden")
+      }.should raise_error(ApiClient::Errors::Forbidden, "Status code: 403")
     end
 
     it "raises an ApiClient::Errors::NotFound if status is 404" do
       @response.env[:status] = 404
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::NotFound, "ApiClient::Errors::NotFound")
+      }.should raise_error(ApiClient::Errors::NotFound, "Status code: 404")
     end
 
     it "raises an ApiClient::Errors::BadRequest if status is 400" do
       @response.env[:status] = 400
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::BadRequest, "ApiClient::Errors::BadRequest")
+      }.should raise_error(ApiClient::Errors::BadRequest, "Status code: 400")
     end
 
     it "raises an ApiClient::Errors::Unsupported if status is 406" do
       @response.env[:status] = 406
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::Unsupported, "ApiClient::Errors::Unsupported")
+      }.should raise_error(ApiClient::Errors::Unsupported, "Status code: 406")
     end
 
     it "raises an ApiClient::Errors::Conflict if status is 409" do
       @response.env[:status] = 409
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::Conflict, "ApiClient::Errors::Conflict")
+      }.should raise_error(ApiClient::Errors::Conflict, "Status code: 409")
     end
 
     it "raises an ApiClient::Errors::Unsupported if status is 422" do
@@ -161,7 +161,7 @@ describe ApiClient::Connection::Basic do
       @response.env[:status] = 502
       lambda {
         @instance.send :handle_response, request, @response
-      }.should raise_error(ApiClient::Errors::ServerError, "ApiClient::Errors::ServerError")
+      }.should raise_error(ApiClient::Errors::ServerError, "Status code: 502")
     end
 
   end
