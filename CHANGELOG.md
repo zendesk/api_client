@@ -1,3 +1,7 @@
+# 0.5.15
+
+ * add response status code to error message
+
 # 0.5.14
 
  * make ApiClient::Base marshallable by not storing proc as instance var
