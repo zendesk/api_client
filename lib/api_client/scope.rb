@@ -15,6 +15,7 @@ module ApiClient
       @params     = {}
       @headers    = {}
       @options    = {}
+      @body       = nil
       @scopeable.default_scopes.each do |default_scope|
         self.instance_eval(&default_scope)
       end
@@ -49,20 +50,35 @@ module ApiClient
 
     def params(options = nil)
       return @params if options.nil?
-      ApiClient::Utils.deep_merge(@params, options)  if options
+      ApiClient::Utils.deep_merge(@params, options)
       self
     end
     alias :scope :params
 
     def headers(options = nil)
       return @headers if options.nil?
-      ApiClient::Utils.deep_merge(@headers, options) if options
+      ApiClient::Utils.deep_merge(@headers, options)
       self
     end
 
+    # Deprecated
     def raw_body(options = nil)
-      return @raw_body if options.nil?
-      @raw_body = options
+      body(options)
+    end
+
+    def body(options = nil)
+      if options.nil?
+        return @body || @raw_body
+      end
+
+      if options.is_a?(String)
+        @raw_body = options
+        @body = nil
+      else
+        ApiClient::Utils.deep_merge(@body || {}, options)
+        @raw_body = nil
+      end
+
       self
     end
 
@@ -82,10 +98,17 @@ module ApiClient
 
     def request(method, path, options = {})
       options = options.dup
-
       raw = raw? || options.delete(:raw)
       params(options)
-      response = connection.send method, path, (@raw_body || @params), @headers
+
+      response = connection.send(method, path, @params, @headers) do |request|
+        if @body
+          request.body = MultiJson.dump(@body)
+        elsif @raw_body
+          request.body = @raw_body
+        end
+      end
+
       raw ? response : @scopeable.parse(response)
     end
 

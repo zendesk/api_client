@@ -59,14 +59,21 @@ describe ApiClient::Scope do
       instance.raw_body.should == 'current'
     end
 
-    it "does request with raw body only if set, skips other params" do
+    it "does request with raw body only if set" do
+      path = '/test'
       connection = double
       instance = ApiClient::Scope.new(ApiClient::Base)
       instance.stub(:connection).and_return(connection)
-      response = Faraday::Response.new(:body => '{"a": "1"}')
-      connection.should_receive(:get).with(@path, 'raw body string', {}).and_return(response)
 
-      result = instance.params({:skipped => 'params'}).raw_body('raw body string').request(:get, @path)
+      request = double
+      request.should_receive(:body=)
+
+      connection.should_receive(:get).with(path, {:test => 1}, {}) do |_, _, _, &block|
+        block.call(request)
+        Faraday::Response.new(:body => '{"a": "1"}')
+      end
+
+      result = instance.params({:test => 1}).body('raw body string').request(:get, path)
       result.should == {"a"=> "1"}
     end
 

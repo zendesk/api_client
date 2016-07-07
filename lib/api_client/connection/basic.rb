@@ -26,8 +26,8 @@ module ApiClient
       # * data - (optional) the query, passed as a hash and converted into query params
       # * headers - (optional) headers sent along with the request
       #
-      def get(path, data = {}, headers = {})
-        exec_request(:get, path, data, headers)
+      def get(path, data = {}, headers = {}, &block)
+        exec_request(:get, path, data, headers, &block)
       end
 
       #### ApiClient::Connection::Abstract#post
@@ -39,8 +39,8 @@ module ApiClient
       # * headers - (optional) headers sent along in the request
       #
       # This method automatically adds the application token header
-      def post(path, data = {}, headers = {})
-        exec_request(:post, path, data, headers)
+      def post(path, data = {}, headers = {}, &block)
+        exec_request(:post, path, data, headers, &block)
       end
 
       #### ApiClient::Connection::Abstract#put
@@ -52,8 +52,8 @@ module ApiClient
       # * headers - (optional) headers sent along in the request
       #
       # This method automatically adds the application token header
-      def put(path, data = {}, headers = {})
-        exec_request(:put, path, data, headers)
+      def put(path, data = {}, headers = {}, &block)
+        exec_request(:put, path, data, headers, &block)
       end
 
       #### FS::Connection#delete
@@ -65,14 +65,14 @@ module ApiClient
       # * headers - (optional) headers sent along in the request
       #
       # This method automatically adds the application token header
-      def delete(path, data = {}, headers = {})
-        exec_request(:delete, path, data, headers)
+      def delete(path, data = {}, headers = {}, &block)
+        exec_request(:delete, path, data, headers, &block)
       end
 
       private
 
-      def exec_request(method, path, data, headers)
-        response = @handler.send(method, path, data, headers)
+      def exec_request(method, path, data, headers, &block)
+        response = @handler.send(method, path, data, headers, &block)
         request = { :method => method, :path => path, :data => data}
         handle_response(request, response)
       rescue Faraday::Error::ConnectionFailed => e

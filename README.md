@@ -121,16 +121,15 @@ ApiClient allows you to apply scoping to your request using 3 methods:
 
   It returns a ApiClient::Scope object attached to a class you started with.
 
-* ApiClient::Base.raw_body(body = nil)
+* ApiClient::Base.body(body = nil)
 
-  Allows setting non-hash body in the request. Useful for binary payloads.
-  Notice: it overrides all parameters set via params method!
+  Allows setting request body directly. Useful for binary payloads.
 
   It returns a ApiClient::Scope object attached to a class you started with.
 
 All of these methods return a ApiClient::Scope object. When you call any request
 methods on this object (get, post, put, delete), the request will apply the
-options, params and headers.
+options, params, headers, and body.
 
 ### Examples
 
