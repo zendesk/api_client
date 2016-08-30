@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   # Declare runtime dependencies here:
   def s.add_runtime_dependencies(method)
     if RUBY_PLATFORM == "java"
-      send method, 'json_pure'
+      send method, 'jrjackson'
       send method, 'hashie', [">= 2.0.5"]
     else
       send method, 'yajl-ruby'
