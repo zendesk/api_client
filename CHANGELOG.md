@@ -1,3 +1,7 @@
+# 0.5.16
+
+ * improve logging, log request details on Logger::DEBUG level
+
 # 0.5.15
 
  * add response status code to error message
