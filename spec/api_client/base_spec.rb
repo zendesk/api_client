@@ -46,7 +46,7 @@ describe ApiClient::Base do
 
     it "inspects subobjects properly" do
       subject.update(:id => 1, :sub => [1,2])
-      subject.inspect.should == '#<ApiClient::Base id: 1, sub: [1, 2]>'
+      subject.inspect.should == '#<ApiClient::Base id: 1, sub: #<Hashie::Array [1, 2]>>'
     end
 
     it "makes sure id is the first key" do

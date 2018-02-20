@@ -143,6 +143,17 @@ ApiClient::Base.
   get('/stuff.json') # => returns a parsed Array object
 ```
 
+## Logging
+
+To log requests set the `ApiClient.logger`. To log request payloads and headers set level to `Logger::DEBUG`
+
+```ruby
+require 'logger'
+ApiClient.logger = Logger.new('api_client.log')
+ApiClient.logger.level = Logger::INFO
+
+```
+
 Copyright
 ---------
 

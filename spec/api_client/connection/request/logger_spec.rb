@@ -1,10 +1,10 @@
 require "spec_helper"
 
 describe ApiClient::Connection::Middlewares::Request::Logger do
-
   it "adds a oauth header to the request" do
-    app      = double
-    logger   = FakeLogger.new
+    app = double
+    io = StringIO.new
+    logger = Logger.new(io)
     instance = ApiClient::Connection::Middlewares::Request::Logger.new(app, logger)
     env = {
       :url => "http://api.twitter.com",
@@ -13,7 +13,6 @@ describe ApiClient::Connection::Middlewares::Request::Logger do
     }
     app.should_receive(:call).with(env)
     instance.call(env)
-    logger.history.first.include?("GET http://api.twitter.com").should be_true
+    io.string.should match("GET http://api.twitter.com")
   end
-
 end
