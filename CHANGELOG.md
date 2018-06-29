@@ -1,3 +1,6 @@
+# 0.5.17
+ * fix a bug where logger on debug level thrown an encoding error #19
+
 # 0.5.16
 
  * improve logging, log request details on Logger::DEBUG level
