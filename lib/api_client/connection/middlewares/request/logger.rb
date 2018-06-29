@@ -14,6 +14,7 @@ class ApiClient::Connection::Middlewares::Request::Logger < Faraday::Middleware
     gather_response_debug_lines(response, taken_sec, debug_lines) if response && should_log_details
 
     if should_log_details
+      debug_lines.each { |line| line.encode!("UTF-8", invalid: :replace, undef: :replace) }
       @logger.debug { debug_lines.join("\n") }
     else
       @logger.info { "#{env[:method].to_s.upcase} #{env[:url]}: #{"%.4f" % taken_sec} seconds" }
