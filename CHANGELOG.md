@@ -1,3 +1,7 @@
+# 0.5.18
+
+* pass along the caller to each `connection` hook
+
 # 0.5.17
  * fix a bug where logger on debug level thrown an encoding error #19
 
