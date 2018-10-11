@@ -24,7 +24,7 @@ module ApiClient
       klass       = Connection.const_get((@adapter || Connection.default).to_s.capitalize)
       @connection = klass.new(@endpoint , @options || {})
       hooks      = @scopeable.connection_hooks || []
-      hooks.each { |hook| hook.call(@connection) }
+      hooks.each { |hook| hook.call(@connection, self) }
       @connection
     end
 
