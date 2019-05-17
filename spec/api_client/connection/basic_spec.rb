@@ -58,6 +58,14 @@ describe ApiClient::Connection::Basic do
       @instance.post "/home", @params, @headers
     end
 
+    it "can perform PATCH requests" do
+      @instance.handler.
+        should_receive(:run_request).
+        with(:patch, '/home', @params, @headers).
+        and_return(@response)
+      @instance.patch "/home", @params, @headers
+    end
+
     it "can perform PUT requests" do
       @instance.handler.
         should_receive(:run_request).

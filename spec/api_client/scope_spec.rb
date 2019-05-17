@@ -147,6 +147,11 @@ describe ApiClient::Scope do
       result.should == {"a"=> "1"}
     end
 
+    it "makes a PATCH request" do
+      result = test_request :patch
+      result.should == {"a"=> "1"}
+    end
+
     it "makes a PUT request" do
       result = test_request :put
       result.should == {"a"=> "1"}
