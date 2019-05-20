@@ -1,3 +1,8 @@
+# 0.5.19
+
+* introduced PATCH requests.
+* brought back ruby < 2.1 compatibility. Process::CLOCK_MONOTONIC is not present until ruby 2.2. There was a breaking change since 0.5.16.
+
 # 0.5.18
 
 * pass along the caller to each `connection` hook
