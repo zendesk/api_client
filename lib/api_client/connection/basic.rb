@@ -43,6 +43,19 @@ module ApiClient
         exec_request(:post, path, data, headers)
       end
 
+      #### ApiClient::Connection::Abstract#patch
+      # Performs a PATCH request
+      # Accepts three parameters:
+      #
+      # * path - the path request should go to
+      # * data - (optional) data sent in the request
+      # * headers - (optional) headers sent along in the request
+      #
+      # This method automatically adds the application token header
+      def patch(path, data = {}, headers = {})
+        exec_request(:patch, path, data, headers)
+      end
+
       #### ApiClient::Connection::Abstract#put
       # Performs a PUT request
       # Accepts three parameters:

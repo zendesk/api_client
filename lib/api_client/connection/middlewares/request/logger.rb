@@ -7,9 +7,9 @@ class ApiClient::Connection::Middlewares::Request::Logger < Faraday::Middleware
 
     gather_request_debug_lines(env, debug_lines) if should_log_details
 
-    start = current_stamp_millisec
+    start = CurrentTimestamp.milis
     response = @app.call(env)
-    taken_sec = (current_stamp_millisec - start) / 1000.0
+    taken_sec = (CurrentTimestamp.milis - start) / 1000.0
 
     gather_response_debug_lines(response, taken_sec, debug_lines) if response && should_log_details
 
@@ -46,7 +46,19 @@ class ApiClient::Connection::Middlewares::Request::Logger < Faraday::Middleware
     debug_lines
   end
 
-  def current_stamp_millisec
-    Process.clock_gettime(Process::CLOCK_MONOTONIC, :millisecond)
+  class CurrentTimestamp
+    class << self
+      version = RUBY_VERSION.split('.').map(&:to_i)
+
+      if (version[0] < 2) || (version[0] == 2 && version[1] < 2)
+        def milis
+          (Time.now.to_f * 1000).to_i
+        end
+      else
+        def milis
+          Process.clock_gettime(Process::CLOCK_MONOTONIC, :millisecond)
+        end
+      end
+    end
   end
 end

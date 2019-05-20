@@ -6,3 +6,4 @@ bin
 coverage
 examples/config.rb
 *.sw[a-z]
+.idea/*
