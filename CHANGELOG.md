@@ -1,3 +1,8 @@
+# 0.5.20
+
+* brought back jruby support
+* updated CI pipeline
+
 # 0.5.19
 
 * introduced PATCH requests.
