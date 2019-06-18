@@ -16,13 +16,12 @@ Gem::Specification.new do |s|
   # Declare runtime dependencies here:
   def s.add_runtime_dependencies(method)
     if RUBY_PLATFORM == "java"
-      send method, 'json_pure'
-      send method, 'hashie', [">= 2.0.5"]
+      send method, 'jrjackson'
     else
       send method, 'yajl-ruby'
-      send method, 'hashie', RUBY_VERSION =~ /1\.8/ ? [">= 2.0.5", "<= 3.4.2"] : [">= 2.0.5"]
     end
 
+    send method, 'hashie', [">= 2.0.5"]
     send method, 'faraday', [">= 0.8.1"]
     send method, 'multi_json', [">= 1.6.1"]
   end
@@ -31,7 +30,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '2.14.1'
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
