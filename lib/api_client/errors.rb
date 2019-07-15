@@ -21,6 +21,7 @@ module ApiClient
     class BadRequest < ApiClientError; end
     class Unsupported < ApiClientError; end
     class Conflict < ApiClientError; end
+    class Gone < ApiClientError; end
     class ServerError < ApiClientError; end
     class UnprocessableEntity < ApiClientError; end
     class TooManyRequests < ApiClientError; end
