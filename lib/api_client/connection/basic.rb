@@ -107,6 +107,8 @@ module ApiClient
             raise ApiClient::Errors::Unsupported.new(nil, request, response)
           when 409
             raise ApiClient::Errors::Conflict.new(nil, request, response)
+          when 410
+            raise ApiClient::Errors::Gone.new(nil, request, response)
           when 422
             raise ApiClient::Errors::UnprocessableEntity.new(response.body, request, response)
           when 429
