@@ -1,3 +1,7 @@
+# 0.5.21
+
+* add support for http 410 status code
+
 # 0.5.20
 
 * brought back jruby support
