@@ -6,8 +6,7 @@ describe ApiClient::Connection::Oauth do
     instance = ApiClient::Connection::Oauth.new("http://google.com")
     instance.handler.builder.handlers.collect(&:name).should == [
       "ApiClient::Connection::Middlewares::Request::OAuth",
-      "Faraday::Request::UrlEncoded",
-      "Faraday::Adapter::NetHttp"
+      "Faraday::Request::UrlEncoded"
     ]
   end
 
@@ -18,8 +17,7 @@ describe ApiClient::Connection::Oauth do
     instance.handler.builder.handlers.collect(&:name).should == [
       "ApiClient::Connection::Middlewares::Request::Logger",
       "ApiClient::Connection::Middlewares::Request::OAuth",
-      "Faraday::Request::UrlEncoded",
-      "Faraday::Adapter::NetHttp"
+      "Faraday::Request::UrlEncoded"
     ]
 
   end

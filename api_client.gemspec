@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
     end
 
     send method, 'hashie', [">= 2.0.5"]
-    send method, 'faraday', [">= 0.8.1", "< 1.0.0"]
+    send method, 'faraday', ["~> 1.0.0"]
     send method, 'multi_json', [">= 1.6.1"]
   end
 

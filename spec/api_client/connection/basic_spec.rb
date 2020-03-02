@@ -9,7 +9,7 @@ describe ApiClient::Connection::Basic do
 
   it "adds basic middlewares to faraday" do
     instance = ApiClient::Connection::Basic.new("http://google.com")
-    instance.handler.builder.handlers.collect(&:name).should == ["Faraday::Request::UrlEncoded", "Faraday::Adapter::NetHttp"]
+    instance.handler.builder.handlers.collect(&:name).should == ["Faraday::Request::UrlEncoded"]
   end
 
   it "adds the logger middlewares to faraday if ApiClient.logger is available" do
@@ -18,8 +18,7 @@ describe ApiClient::Connection::Basic do
     instance = ApiClient::Connection::Basic.new("http://google.com")
     instance.handler.builder.handlers.collect(&:name).should == [
       "ApiClient::Connection::Middlewares::Request::Logger",
-      "Faraday::Request::UrlEncoded",
-      "Faraday::Adapter::NetHttp"
+      "Faraday::Request::UrlEncoded"
     ]
 
   end
