@@ -1,3 +1,7 @@
+# 0.5.22
+
+* Add constraint on faraday < 1.0.0 as it breaks compatibility
+
 # 0.5.21
 
 * add support for http 410 status code
