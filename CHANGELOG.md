@@ -1,3 +1,7 @@
+# 0.5.23
+
+* Add support for HTTP status code: 423 Locked
+
 # 0.5.22
 
 * Add constraint on faraday < 1.0.0 as it breaks compatibility
