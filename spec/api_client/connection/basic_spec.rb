@@ -156,6 +156,13 @@ describe ApiClient::Connection::Basic do
       }.should raise_error(ApiClient::Errors::UnprocessableEntity, @response.body)
     end
 
+    it "raises an ApiClient::Errors::Locked if status is 423" do
+      @response.env[:status] = 423
+      lambda {
+        @instance.send :handle_response, request, @response
+      }.should raise_error(ApiClient::Errors::Locked, @response.body)
+    end
+
     it "raises an ApiClient::Errors::TooManyRequests if status is 429" do
       @response.env[:status] = 429
       lambda {
