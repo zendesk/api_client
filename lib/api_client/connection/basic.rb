@@ -111,6 +111,8 @@ module ApiClient
             raise ApiClient::Errors::Gone.new(nil, request, response)
           when 422
             raise ApiClient::Errors::UnprocessableEntity.new(response.body, request, response)
+          when 423
+            raise ApiClient::Errors::Locked.new(response.body, request, response)
           when 429
             raise ApiClient::Errors::TooManyRequests.new(response.body, request, response)
           when 300..399
