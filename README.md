@@ -154,7 +154,8 @@ ApiClient.logger.level = Logger::INFO
 
 ```
 
-Copyright
----------
+## Copyright and license
 
-Copyright (c) 2011 Marcin Bunsch, See LICENSE for details.
+Copyright 2020 Zendesk
+
+Licensed under the [Apache License, Version 2.0](LICENSE)
