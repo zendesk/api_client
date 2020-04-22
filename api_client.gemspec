@@ -5,11 +5,12 @@ require "api_client/version"
 Gem::Specification.new do |s|
   s.name        = "api_client"
   s.version     = ApiClient::VERSION
-  s.authors     = ["Marcin Bunsch"]
-  s.email       = ["marcin@futuresimple.com"]
+  s.authors     = ["Zendesk"]
+  s.email       = ["opensource@zendesk.com"]
   s.homepage    = "https://github.com/futuresimple/api_client"
   s.summary     = %q{API client builder}
   s.description = %q{API client builder}
+  s.license     = "Apache License Version 2.0"
 
   s.rubyforge_project = "api_client"
 
