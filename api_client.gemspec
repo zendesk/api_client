@@ -15,9 +15,9 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "api_client"
   
   if RUBY_PLATFORM =~ /java/
-    spec.required_ruby_version = ">= 9.0"
+    s.required_ruby_version = ">= 9.0"
   else 
-    spec.required_ruby_version = ">= 2.2.0"
+    s.required_ruby_version = ">= 2.2.0"
   end
 
   # Declare runtime dependencies here:
