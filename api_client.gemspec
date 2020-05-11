@@ -13,7 +13,8 @@ Gem::Specification.new do |s|
   s.license     = "Apache License Version 2.0"
 
   s.rubyforge_project = "api_client"
-
+  s.required_ruby_version = ">= 2.2.0"
+ 
   # Declare runtime dependencies here:
   def s.add_runtime_dependencies(method)
     if RUBY_PLATFORM == "java"
@@ -42,8 +43,8 @@ Gem::Specification.new do |s|
     s.add_runtime_dependencies(:add_dependency)
   end
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files         = Dir['lib/*.rb'] + Dir['spec/*.rb'] + Dir['[A-Z]*']
+  s.test_files    = Dir['spec/*.rb']
+  s.executables   = []
   s.require_paths = ["lib"]
 end
