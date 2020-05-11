@@ -42,8 +42,8 @@ Gem::Specification.new do |s|
     s.add_runtime_dependencies(:add_dependency)
   end
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files         = Dir['lib/*.rb'] + Dir['spec/*.rb'] + Dir['[A-Z]*']
+  s.test_files    = Dir['spec/*.rb']
+  s.executables   = []
   s.require_paths = ["lib"]
 end
