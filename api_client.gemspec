@@ -13,13 +13,8 @@ Gem::Specification.new do |s|
   s.license     = "Apache License Version 2.0"
 
   s.rubyforge_project = "api_client"
-  
-  if RUBY_PLATFORM =~ /java/
-    s.required_ruby_version = ">= 9.0.0.0"
-  else 
-    s.required_ruby_version = ">= 2.2.0"
-  end
-
+  s.required_ruby_version = ">= 2.2.0"
+ 
   # Declare runtime dependencies here:
   def s.add_runtime_dependencies(method)
     if RUBY_PLATFORM == "java"
