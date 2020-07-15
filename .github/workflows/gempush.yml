@@ -9,6 +9,7 @@ jobs:
     name: Build + Publish
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         ruby-version: ["head", "jruby"]
 
