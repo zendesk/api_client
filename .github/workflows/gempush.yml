@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ["2.6.x", "jruby"]
+        ruby-version: ["head", "jruby"]
 
     steps:
     - uses: zendesk/checkout@v2
-    - name: Set up Ruby 2.6
+    - name: Set up Ruby
       uses: zendesk/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
