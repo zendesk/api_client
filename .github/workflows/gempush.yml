@@ -17,7 +17,7 @@ jobs:
     - name: Set up Ruby 2.6
       uses: zendesk/setup-ruby@v1
       with:
-        version: ${{ matrix.ruby-version }}
+        ruby-version: ${{ matrix.ruby-version }}
 
     - name: Publish to RubyGems
       run: |
