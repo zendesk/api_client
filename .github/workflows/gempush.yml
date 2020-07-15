@@ -8,13 +8,16 @@ jobs:
   build:
     name: Build + Publish
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ["2.6.x", "jruby"]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: zendesk/checkout@v2
     - name: Set up Ruby 2.6
-      uses: actions/setup-ruby@v1
+      uses: zendesk/setup-ruby@v1
       with:
-        version: 2.6.x
+        version: ${{ matrix.ruby-version }}
 
     - name: Publish to RubyGems
       run: |

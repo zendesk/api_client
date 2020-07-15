@@ -14,6 +14,8 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "api_client"
   s.required_ruby_version = ">= 2.2.0"
+  
+  s.platform = "java" if RUBY_PLATFORM == "java"
  
   # Declare runtime dependencies here:
   def s.add_runtime_dependencies(method)
