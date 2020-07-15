@@ -13,9 +13,9 @@ jobs:
         ruby-version: ["2.6.x", "jruby"]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: zendesk/checkout@v2
     - name: Set up Ruby 2.6
-      uses: actions/setup-ruby@v1
+      uses: zendesk/setup-ruby@v1
       with:
         version: ${{ matrix.ruby-version }}
 
