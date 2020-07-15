@@ -14,9 +14,9 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "api_client"
   s.required_ruby_version = ">= 2.2.0"
-  
+
   s.platform = "java" if RUBY_PLATFORM == "java"
- 
+
   # Declare runtime dependencies here:
   def s.add_runtime_dependencies(method)
     if RUBY_PLATFORM == "java"
@@ -45,8 +45,8 @@ Gem::Specification.new do |s|
     s.add_runtime_dependencies(:add_dependency)
   end
 
-  s.files         = Dir['lib/*.rb'] + Dir['spec/*.rb'] + Dir['[A-Z]*']
-  s.test_files    = Dir['spec/*.rb']
+  s.files         = Dir['lib/**/*.rb'] + Dir['spec/**/*.rb'] + Dir['[A-Z]*']
+  s.test_files    = Dir['spec/**/*.rb']
   s.executables   = []
   s.require_paths = ["lib"]
 end

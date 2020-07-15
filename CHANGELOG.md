@@ -1,3 +1,7 @@
+# 0.5.25
+
+* Fix broken gem build (gemspec files)
+
 # 0.5.23
 
 * Add support for HTTP status code: 423 Locked
