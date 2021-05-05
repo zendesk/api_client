@@ -24,6 +24,7 @@ module ApiClient
     class Gone < ApiClientError; end
     class ServerError < ApiClientError; end
     class UnprocessableEntity < ApiClientError; end
+    class PreconditionFailed < ApiClientError; end
     class Locked < ApiClientError; end
     class TooManyRequests < ApiClientError; end
   end

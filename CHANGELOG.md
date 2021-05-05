@@ -1,3 +1,7 @@
+# 0.5.26
+
+* Add support for HTTP status code: 412 Precondition Failed
+
 # 0.5.25
 
 * Fix broken gem build (gemspec files)

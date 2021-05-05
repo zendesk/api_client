@@ -149,6 +149,13 @@ describe ApiClient::Connection::Basic do
       }.should raise_error(ApiClient::Errors::Gone, "Status code: 410")
     end
 
+    it "raises an ApiClient::Errors::PreconditionFailed if status is 412" do
+      @response.env[:status] = 412
+      lambda {
+        @instance.send :handle_response, request, @response
+      }.should raise_error(ApiClient::Errors::PreconditionFailed, "Status code: 412")
+    end
+
     it "raises an ApiClient::Errors::Unsupported if status is 422" do
       @response.env[:status] = 422
       lambda {
