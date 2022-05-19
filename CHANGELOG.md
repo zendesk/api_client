@@ -1,3 +1,7 @@
+# 0.5.27
+
+* Add support for faraday gem version >= 1.0.0 and < 2.0.0
+
 # 0.5.26
 
 * Add support for HTTP status code: 412 Precondition Failed

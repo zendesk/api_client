@@ -4,10 +4,10 @@ describe ApiClient::Connection::Oauth do
 
   it "adds basic middlewares to faraday" do
     instance = ApiClient::Connection::Oauth.new("http://google.com")
+    instance.handler.builder.adapter.name.should == "Faraday::Adapter::NetHttp"
     instance.handler.builder.handlers.collect(&:name).should == [
       "ApiClient::Connection::Middlewares::Request::OAuth",
-      "Faraday::Request::UrlEncoded",
-      "Faraday::Adapter::NetHttp"
+      "Faraday::Request::UrlEncoded"
     ]
   end
 
@@ -15,11 +15,11 @@ describe ApiClient::Connection::Oauth do
     logger = double
     ApiClient.stub(:logger).and_return(logger)
     instance = ApiClient::Connection::Oauth.new("http://google.com")
+    instance.handler.builder.adapter.name.should == "Faraday::Adapter::NetHttp"
     instance.handler.builder.handlers.collect(&:name).should == [
       "ApiClient::Connection::Middlewares::Request::Logger",
       "ApiClient::Connection::Middlewares::Request::OAuth",
-      "Faraday::Request::UrlEncoded",
-      "Faraday::Adapter::NetHttp"
+      "Faraday::Request::UrlEncoded"
     ]
 
   end
