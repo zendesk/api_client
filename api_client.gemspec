@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.license     = "Apache License Version 2.0"
 
   s.rubyforge_project = "api_client"
-  s.required_ruby_version = ">= 2.2.0"
+  s.required_ruby_version = ">= 2.3.8"
 
   s.platform = "java" if RUBY_PLATFORM == "java"
 
