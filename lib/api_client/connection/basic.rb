@@ -88,7 +88,7 @@ module ApiClient
         response = @handler.send(method, path, data, headers)
         request = { :method => method, :path => path, :data => data}
         handle_response(request, response)
-      rescue Faraday::Error::ConnectionFailed => e
+      rescue Faraday::ConnectionFailed => e
         raise ApiClient::Errors::ConnectionFailed.new(e.message, request, response)
       end
 
