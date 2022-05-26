@@ -7,21 +7,21 @@ describe ApiClient::Connection::Basic do
     instance.inspect.should == '#<ApiClient::Connection::Basic endpoint: "http://google.com">'
   end
 
+  it "uses correct adapter" do
+    instance = ApiClient::Connection::Basic.new("http://google.com")
+    expect(instance.handler.builder.adapter.name).to eq("Faraday::Adapter::NetHttp")
+  end
+
   it "adds basic middlewares to faraday" do
     instance = ApiClient::Connection::Basic.new("http://google.com")
-    instance.handler.builder.handlers.collect(&:name).should == ["Faraday::Request::UrlEncoded", "Faraday::Adapter::NetHttp"]
+    expect(instance.handler.builder.handlers.collect(&:name)).to include("Faraday::Request::UrlEncoded")
   end
 
   it "adds the logger middlewares to faraday if ApiClient.logger is available" do
     logger = double
     ApiClient.stub(:logger).and_return(logger)
     instance = ApiClient::Connection::Basic.new("http://google.com")
-    instance.handler.builder.handlers.collect(&:name).should == [
-      "ApiClient::Connection::Middlewares::Request::Logger",
-      "Faraday::Request::UrlEncoded",
-      "Faraday::Adapter::NetHttp"
-    ]
-
+    expect(instance.handler.builder.handlers.collect(&:name)).to include("ApiClient::Connection::Middlewares::Request::Logger", "Faraday::Request::UrlEncoded")
   end
 
   it "creates a Faraday object on initialize" do
