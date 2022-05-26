@@ -1,3 +1,3 @@
 module ApiClient
-  VERSION = '0.5.27'
+  VERSION = '0.6.0'
 end
