@@ -19,9 +19,10 @@ jobs:
         - 2.7.6
         - 3.0.4
         - 3.1.2
+        - 3.2.0
 
     steps:
-    - uses: zendesk/checkout@v2
+    - uses: zendesk/checkout@v3
     - name: Set up Ruby
       uses: zendesk/setup-ruby@v1
       with:
