@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   end
 
   # Declare development dependencies here:
-  s.add_development_dependency 'rspec', '2.14.1'
+  s.add_development_dependency 'rspec', '< 4'
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

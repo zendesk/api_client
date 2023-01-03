@@ -64,14 +64,14 @@ describe ApiClient::Resource::Base do
     describe "#remote_update" do
 
       it "delegates the update to the class" do
-        ApiClient::Resource::Base.should_receive(:update).with(42, "name" => "Mike")
+        ApiClient::Resource::Base.should_receive(:update).with(42, { "name" => "Mike" })
         @instance.remote_update
       end
 
       it "retains the original scope" do
         ApiClient::Resource::Base.stub(:update)
         @instance.original_scope = double
-        @instance.original_scope.should_receive(:update).with(42, "name" => "Mike")
+        @instance.original_scope.should_receive(:update).with(42, { "name" => "Mike" })
         @instance.remote_update
       end
 
@@ -80,13 +80,13 @@ describe ApiClient::Resource::Base do
     describe "#remote_create" do
 
       it "delegates the create to the class" do
-        ApiClient::Resource::Base.should_receive(:create).with("name" => "Mike")
+        ApiClient::Resource::Base.should_receive(:create).with({ "name" => "Mike" })
         @instance.remote_create
       end
 
       it "retains the original scope" do
         @instance.original_scope = double
-        @instance.original_scope.should_receive(:create).with("name" => "Mike")
+        @instance.original_scope.should_receive(:create).with({ "name" => "Mike" })
         @instance.remote_create
       end
 
