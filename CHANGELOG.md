@@ -1,3 +1,6 @@
+# 0.6.1
+* Add support for Ruby 3.2
+
 # 0.6.0
 
 * Add support for faraday gem version >= 1.0.0 and < 2.0.0

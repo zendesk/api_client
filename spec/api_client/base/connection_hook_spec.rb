@@ -9,8 +9,8 @@ describe ApiClient::Base do
       class ConnectionHookTest < ApiClient::Base
         connection &ConnectionHookTestProc
       end
-      ConnectionHookTest.connection_hooks.size.should == 1
-      ConnectionHookTest.connection_hooks.should == [ConnectionHookTestProc]
+      expect(ConnectionHookTest.connection_hooks.size).to eq(1)
+      expect(ConnectionHookTest.connection_hooks).to eq([ConnectionHookTestProc])
     end
 
   end
