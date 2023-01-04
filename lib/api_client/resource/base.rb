@@ -49,11 +49,11 @@ module ApiClient
       end
 
       def remote_update
-        get_scope.update(self.id, **payload)
+        get_scope.update(self.id, payload)
       end
 
       def remote_create
-        get_scope.create(**payload)
+        get_scope.create(payload)
       end
 
       def get_scope
