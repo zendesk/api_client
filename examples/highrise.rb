@@ -1,6 +1,6 @@
 require "rubygems"
 require "bundler/setup"
-require "./examples/config" if File.exists?('examples/config.rb')
+require "./examples/config" if File.exist?('examples/config.rb')
 require "api_client"
 require "multi_xml"
 

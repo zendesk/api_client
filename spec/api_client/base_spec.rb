@@ -80,7 +80,7 @@ describe ApiClient::Base do
     it "doesn't fail for predicate methods if key is not set" do
       api = StrictApi.new
       lambda { api.missing? }.should_not raise_error
-      api.missing?.should be_false
+      expect(api.missing?).to be false
     end
 
     it "allows to call methods" do
