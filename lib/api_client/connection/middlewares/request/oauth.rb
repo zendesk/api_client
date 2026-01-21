@@ -1,8 +1,7 @@
 # Borrowed from https://github.com/pengwynn/faraday_middleware/blob/master/lib/faraday/request/oauth.rb
+require 'simple_oauth'
+
 class ApiClient::Connection::Middlewares::Request::OAuth < Faraday::Middleware
-
-  dependency 'simple_oauth'
-
   def call(env)
     params = env[:body] || {}
     signature_params = params.reject{ |k,v| v.respond_to?(:content_type) }
