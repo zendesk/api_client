@@ -1,9 +1,11 @@
 # Borrowed from https://github.com/pengwynn/faraday_middleware/blob/master/lib/faraday/request/oauth.rb
 class ApiClient::Connection::Middlewares::Request::OAuth < Faraday::Middleware
 
-  dependency 'simple_oauth'
-
+  # faraday 2 removed the `dependency` DSL from Faraday::Middleware, so keep
+  # the require lazy (inside #call) to preserve the old behaviour of not
+  # forcing simple_oauth on consumers that never use the OAuth connection.
   def call(env)
+    require 'simple_oauth'
     params = env[:body] || {}
     signature_params = params.reject{ |k,v| v.respond_to?(:content_type) }
 
