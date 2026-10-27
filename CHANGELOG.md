@@ -1,3 +1,8 @@
+# 0.6.1
+
+* Allow faraday 2.x (`>= 0.8.1, < 3`)
+* Replace faraday 1-only `dependency 'simple_oauth'` DSL with a lazy `require` (the DSL was removed in faraday 2)
+
 # 0.6.0
 
 * Add support for faraday gem version >= 1.0.0 and < 2.0.0
